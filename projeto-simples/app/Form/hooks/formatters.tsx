@@ -14,16 +14,9 @@ export const formatNumber = (value: string): string => {
 };
 
 export const unformatCurrency = (value: string): number => {
-    // Remove os separadores de milhar (pontos)
     const withoutThousandSeparators = value.replace(/\./g, '');
-  
-    // Substitui a vírgula decimal por um ponto
     const withDotDecimal = withoutThousandSeparators.replace(',', '.');
-  
-    // Converte a string para um número
     const numberValue = parseFloat(withDotDecimal);
-  
-    // Verifica se o número é válido
     return isNaN(numberValue) ? 0 : numberValue;
   };
   

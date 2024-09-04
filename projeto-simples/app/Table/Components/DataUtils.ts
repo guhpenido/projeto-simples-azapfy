@@ -7,8 +7,8 @@ export function createData(
     valor: string,
     peso: number,
     volume: number,
-    prazMin: string,
-    prazMax: string,
+    prazoMin: string,
+    prazoMax: string,
     desc: string
 ): Data {
     return {
@@ -18,8 +18,8 @@ export function createData(
         valor,
         peso,
         volume,
-        prazMin,
-        prazMax,
+        prazoMin,
+        prazoMax,
         desc,
     };
 }

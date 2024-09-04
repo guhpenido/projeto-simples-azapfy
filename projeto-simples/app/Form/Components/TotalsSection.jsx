@@ -69,7 +69,6 @@ function TotalsSection({ register, products }) {
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 startAdornment={<InputAdornment position="start">R$</InputAdornment>}
                 register={register}
-                readOnly
             />
             <CustomInput
                 id="totalNota"
@@ -82,7 +81,6 @@ function TotalsSection({ register, products }) {
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 startAdornment={<InputAdornment position="start">R$</InputAdornment>}
                 register={register}
-                readOnly
             />
             <CustomInput
                 id="pesoTotal"
@@ -92,7 +90,6 @@ function TotalsSection({ register, products }) {
                 value={pesoTotal}
                 endAdornment={<InputAdornment position="end">kg</InputAdornment>}
                 register={register}
-                readOnly
             />
             <CustomInput
                 id="volumeTotal"
@@ -102,7 +99,6 @@ function TotalsSection({ register, products }) {
                 value={volumeTotal}
                 endAdornment={<InputAdornment position="end">uni</InputAdornment>}
                 register={register}
-                readOnly
             />
         </Box>
     );
