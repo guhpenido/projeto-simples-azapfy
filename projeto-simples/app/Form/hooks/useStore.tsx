@@ -14,6 +14,7 @@ type Product = {
 type Store = {
   products: Product[];
   addProduct: (product: Product) => void;
+  removeProductById: (id: number) => void;
   getProducts: () => Product[];
 };
 
@@ -21,12 +22,14 @@ const useStore = create<Store>((set) => ({
   products: [],
   addProduct: (product) =>
     set((state) => ({ products: [...state.products, product] })),
+  removeProductById: (id) =>
+    set((state) => ({
+      products: state.products.filter((_, index) => index !== id),
+    })),
   getProducts: (): Product[] => {
     const state = useStore.getState();
     return state.products;
   },
 }));
-
-
 
 export default useStore;
