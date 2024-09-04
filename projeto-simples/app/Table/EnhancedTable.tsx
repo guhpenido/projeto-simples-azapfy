@@ -162,7 +162,7 @@ const EnhancedTable: React.FC = () => {
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label="Comprimir tabela"
       />
     </Box>
   );

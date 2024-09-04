@@ -131,6 +131,7 @@ function ProductDetailsForm({ register, control, setValue, calculatedValue, setC
                                     onChange={(newValue) =>
                                         setValue("prazoMin", newValue?.toDate() || "")
                                     }
+                                    format="DD/MM/YYYY"
                                 />
                             )}
                         />
@@ -148,6 +149,7 @@ function ProductDetailsForm({ register, control, setValue, calculatedValue, setC
                                     onChange={(newValue) =>
                                         setValue("prazoMax", newValue?.toDate() || "")
                                     }
+                                    format="DD/MM/YYYY"
                                 />
                             )}
                         />

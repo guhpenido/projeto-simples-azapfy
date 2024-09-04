@@ -101,6 +101,7 @@ function TotalsSection({ register, products }) {
                 register={register}
             />
         </Box>
+
     );
 }
 
