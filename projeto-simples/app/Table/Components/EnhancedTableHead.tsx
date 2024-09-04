@@ -1,8 +1,8 @@
 import React from 'react';
 import { TableHead, TableRow, TableCell, TableSortLabel, Box, Checkbox } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
-import { Order, Data } from './Types';
-import { headCells } from './HeadCells';
+import { Order, Data } from '../Utils/Types';
+import { headCells } from '../Utils/HeadCells';
 
 interface EnhancedTableHeadProps {
     numSelected: number;

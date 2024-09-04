@@ -3,16 +3,8 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
-    TablePagination,
     TableRow,
-    TableSortLabel,
-    Toolbar,
-    Typography,
     Paper,
-    Checkbox,
-    IconButton,
-    Tooltip,
     FormControlLabel,
     Switch,
     Table,
@@ -24,10 +16,10 @@ import EnhancedTableHead from './Components/EnhancedTableHead';
 import EnhancedTableToolbar from './Components/EnhancedTableToolbar';
 import EnhancedTableRow from './Components/EnhancedTableRow';
 import EnhancedTablePagination from './Components/EnhancedTablePagination';
-import { Data, Order } from './Components/Types';
-import { createData } from './Components/DataUtils';
-import { headCells } from './Components/HeadCells';
-import { getComparator } from './Components/ComparatorUtils';
+import { Data, Order } from './Utils/Types';
+import { createData } from './Utils/DataUtils';
+import { headCells } from './Utils/HeadCells';
+import { getComparator } from './Utils/ComparatorUtils';
 
 const EnhancedTable: React.FC = () => {
   const [order, setOrder] = useState<Order>("asc");

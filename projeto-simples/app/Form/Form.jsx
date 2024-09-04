@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Typography, Button } from "@mui/material";
 import dayjs from "dayjs";
@@ -16,7 +16,7 @@ function Form() {
   const products = useStore((state) => state.products);
   const addProduct = useStore((state) => state.addProduct);
 
-  const onSubmit = (data) => {
+  const onSubmit = useCallback((data) => {
     const product = {
       quantidade: data.quantidade,
       vlrUnit: data.valorUnitario,
@@ -41,7 +41,7 @@ function Form() {
     });
 
     setCalculatedValue("0,00");
-  };
+  }, [addProduct, reset]);
 
   return (
     <Box p={4}>

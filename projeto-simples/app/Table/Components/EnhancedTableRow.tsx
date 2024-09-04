@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableRow, TableCell, Checkbox } from "@mui/material";
-import { Data } from './Types';
+import { Data } from '../Utils/Types';
 
 interface EnhancedTableRowProps {
   row: Data;
