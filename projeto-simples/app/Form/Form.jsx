@@ -8,8 +8,11 @@ import { unformatCurrency, unformatNumber } from "./hooks/formatters.tsx";
 import TotalsSection from "./Components/TotalsSection";
 import ProductDetailsForm from "./Components/ProductDetailsForm";
 import AdditionalInfoSection from "./Components/AdditionalInfoSection";
+import FormController from "./hooks/formController.tsx";
+import { FormProvider, useFormContext } from "react-hook-form";
 
 function Form() {
+  const methods = useForm();
   const { register, handleSubmit, control, setValue, reset } = useForm();
   const [calculatedValue, setCalculatedValue] = useState("0,00");
 
@@ -49,25 +52,25 @@ function Form() {
         Mais informações
       </Typography>
 
-      <TotalsSection register={register} products={products} />
+      {/* <TotalsSection register={register} products={products} /> */}
 
       <AdditionalInfoSection register={register} />
 
       <Typography variant="h6" color="textSecondary" mt={3}>
         Descrição do Produto/Serviço
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ProductDetailsForm
-          register={register}
-          control={control}
-          setValue={setValue}
-          calculatedValue={calculatedValue}
-          setCalculatedValue={setCalculatedValue}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          +
-        </Button>
-      </form>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ProductDetailsForm
+            register={register}
+            setValue={setValue}
+          />
+          <Button type="submit" variant="contained" color="primary">
+            +
+          </Button>
+          <FormController />
+        </form>
+      </FormProvider>
     </Box>
   );
 }

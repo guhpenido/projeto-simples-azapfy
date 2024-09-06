@@ -25,3 +25,11 @@ export const unformatNumber = (value: string): number => {
     const unformattedValue = value.replace(/\D/g, "").replace(".", "");
     return parseFloat(unformattedValue);
 };
+
+export function revertCurrency(currencyString: string) {
+    if(!currencyString) return 0;
+    const numericString = currencyString
+      .replace(/[R$.\s]/g, '')
+      .replace(',', '.'); 
+    return parseFloat(numericString);
+  }
