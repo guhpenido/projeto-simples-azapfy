@@ -33,11 +33,12 @@ const EnhancedTable: React.FC = () => {
   const [rows, setRows] = useState<Data[]>([]);
 
   useEffect(() => {
+    console.log("products", products);
     const newRows = products.map((produto, index) => createData(
       index,
-      produto.quantidade,
-      produto.vlrUnit,
-      formatNumber(produto.valor.toString()),
+      produto.quantidade.toString(),
+      produto.vlrUnit.toString(),
+      produto.valor.toString(),
       produto.peso,
       produto.volume,
       produto.prazoMin,
@@ -146,7 +147,7 @@ const EnhancedTable: React.FC = () => {
               })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={headCells.length + 1} />
+                  <TableCell align='center' colSpan={headCells.length + 1} />
                 </TableRow>
               )}
             </TableBody>

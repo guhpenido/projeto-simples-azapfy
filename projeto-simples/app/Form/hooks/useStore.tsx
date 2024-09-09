@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 type Product = {
-  quantidade: string;
-  vlrUnit: string;
+  quantidade: number;
+  vlrUnit: number;
   valor: number;
   peso: number;
   volume: number;

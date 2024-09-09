@@ -1,120 +1,151 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, InputAdornment } from "@mui/material";
-import CustomInput from "./CustomInput";
-import { unformatCurrency, formatCurrency } from "../hooks/formatters.tsx";
+import { useFormContext, useWatch, Controller } from "react-hook-form";
+import { NumericFormat } from 'react-number-format';
+import { TextField } from '@mui/material';
 
-function TotalsSection({ register, products }) {
-    const [frete, setFrete] = useState("0,00");
-    const [desconto, setDesconto] = useState("0,00");
-    const [totalProdutos, setTotalProdutos] = useState("0,00");
-    const [totalNota, setTotalNota] = useState("0,00");
-    const [pesoTotal, setPesoTotal] = useState("0,00");
-    const [volumeTotal, setVolumeTotal] = useState("0,00");
-
-    useEffect(() => {
-        const freteValue = parseFloat(unformatCurrency(frete)) || 0;
-        const descontoValue = parseFloat(unformatCurrency(desconto)) || 0;
-
-        if (products.length > 0) {
-            const totalProdutosValue = products.reduce((sum, product) => sum + product.valor, 0);
-            setTotalProdutos(totalProdutosValue);
-            setPesoTotal(products.reduce((sum, product) => sum + product.peso, 0));
-            setVolumeTotal(products.reduce((sum, product) => sum + product.volume, 0));
-            const totalNotaValue = totalProdutosValue + freteValue - descontoValue;
-            setTotalNota(totalNotaValue);
-        }else{
-            setTotalProdutos(0);
-            setPesoTotal(0);
-            setVolumeTotal(0);
-            setTotalNota(0);
-        }
-    }, [products, frete, desconto]);
-
+function TotalsSection({ register }) {
+    const { control, setValue, getValues } = useFormContext();
     return (
         <Box className="flex flex-row flex-wrap">
-            <CustomInput
-                id="frete"
-                label="Valor do Frete"
-                type="text"
+            <Controller
                 name="frete"
-                value={frete}
-                startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-                register={register}
-                onChange={(e) => {
-                    e.target.value = formatCurrency(e.target.value);
-                    setFrete(e.target.value);
-                }}
+                control={control}
+                render={({ field: { onChange, value, ...field } }) => (
+                    <NumericFormat
+                        {...field}
+                        value={value ?? ''}
+                        onValueChange={({ floatValue }) => {
+                            onChange(floatValue ?? 0);
+                        }}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        customInput={TextField}
+                        label="Valor do Frete"
+                        className="m-4 w-80"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                        }}
+                        {...register('frete')}
+                    />
+                )}
             />
-            <CustomInput
-                id="desconto"
-                label="Desconto"
-                type="text"
+            <Controller
                 name="desconto"
-                value={desconto}
-                startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-                register={register}
-                onChange={(e) => {
-                    e.target.value = formatCurrency(e.target.value);
-                    setDesconto(e.target.value);
-                }}
+                control={control}
+                render={({ field: { onChange, value, ...field } }) => (
+                    <NumericFormat
+                        {...field}
+                        value={value ?? ''}
+                        onValueChange={({ floatValue }) => {
+                            onChange(floatValue ?? 0);
+                        }}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        customInput={TextField}
+                        label="Desconto"
+                        className="m-4 w-80"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                        }}
+                        {...register('desconto')}
+                    />
+                )}
             />
-            <CustomInput
-                id="totalProdutos"
-                label="Total dos Produtos/Serviços"
-                type="text"
+            <Controller
                 name="totalProdutos"
-                value={parseFloat(totalProdutos)
-                    .toFixed(2)
-                    .replace(".", ",")
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-                register={register}
-                onChange={(e) => {
-                    setTotalProdutos(e.target.value);
-                }}
+                control={control}
+                render={({ field: { onChange, value, ...field } }) => (
+                    <NumericFormat
+                        {...field}
+                        value={value ?? ''}
+                        onValueChange={({ floatValue }) => {
+                            onChange(floatValue ?? 0);
+                            setValue('totalProdutos', floatValue ?? 0);
+                        }}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        customInput={TextField}
+                        label="Total dos Produtos/Serviços"
+                        className="m-4 w-80"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                        }}
+                        {...register('totalProdutos')}
+                    />
+                )}
             />
-            <CustomInput
-                id="totalNota"
-                label="Total da Nota"
-                type="text"
+            <Controller
                 name="totalNota"
-                value={parseFloat(totalNota)
-                    .toFixed(2)
-                    .replace(".", ",")
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-                register={register}
-                onChange={(e) => {
-                    setTotalNota(e.target.value);
-                }}
+                control={control}
+                render={({ field: { onChange, value, ...field } }) => (
+                    <NumericFormat
+                        {...field}
+                        value={value ?? ''}
+                        onValueChange={({ floatValue }) => {
+                            onChange(floatValue ?? 0);
+                            setValue('totalNota', floatValue ?? 0);
+                        }}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        customInput={TextField}
+                        label="Total da Nota"
+                        className="m-4 w-80"
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                        }}
+                        {...register('totalNota')}
+                    />
+                )}
             />
-            <CustomInput
-                id="pesoTotal"
-                label="Peso Total"
-                type="text"
+            <Controller
                 name="pesoTotal"
-                value={pesoTotal}
-                endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-                register={register}
-                onChange={(e) => {
-                    setPesoTotal(e.target.value);
-                }}
+                control={control}
+                render={({ field: { onChange, value, ...field } }) => (
+                    <NumericFormat
+                        {...field}
+                        value={value ?? ''}
+                        onValueChange={({ floatValue }) => {
+                            onChange(floatValue ?? 0);
+                            setValue('pesoTotal', floatValue ?? 0);
+                        }}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        customInput={TextField}
+                        label="Peso Total"
+                        className="m-4 w-80"
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+                        }}
+                        {...register('pesoTotal')}
+                    />
+                )}
             />
-            <CustomInput
-                id="volumeTotal"
-                label="Volume Total"
-                type="text"
+            <Controller
                 name="volumeTotal"
-                value={volumeTotal}
-                endAdornment={<InputAdornment position="end">uni</InputAdornment>}
-                register={register}
-                onChange={(e) => {
-                    setVolumeTotal(e.target.value);
-                }}
+                control={control}
+                render={({ field: { onChange, value, ...field } }) => (
+                    <NumericFormat
+                        {...field}
+                        value={value ?? ''}
+                        onValueChange={({ floatValue }) => {
+                            onChange(floatValue ?? 0);
+                            setValue('volumeTotal', floatValue ?? 0);
+                        }}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        customInput={TextField}
+                        label="Volume Total"
+                        className="m-4 w-80"
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">uni</InputAdornment>,
+                        }}
+                        {...register('volumeTotal')}
+                    />
+                )}
             />
         </Box>
-
     );
 }
 
-export default TotalsSection;
+export default React.memo(TotalsSection);

@@ -33,13 +33,13 @@ const EnhancedTableRow: React.FC<EnhancedTableRowProps> = (props) => {
       <TableCell component="th" id={labelId} scope="row" padding="none">
         {row.quantidade}
       </TableCell>
-      <TableCell align="right">R$ {row.vlrUnit}</TableCell>
-      <TableCell align="right">R$ {row.valor}</TableCell>
-      <TableCell align="right">{row.peso}kg</TableCell>
-      <TableCell align="right">{row.volume} uni</TableCell>
-      <TableCell align="right">{row.prazoMin}</TableCell>
-      <TableCell align="right">{row.prazoMax}</TableCell>
-      <TableCell align="right">{row.desc}</TableCell>
+      <TableCell align="center">R$ {row.vlrUnit}</TableCell>
+      <TableCell align="center">R$ {row.valor}</TableCell>
+      <TableCell align="center">{row.peso}kg</TableCell>
+      <TableCell align="center">{row.volume} uni</TableCell>
+      <TableCell align="center">{row.prazoMin}</TableCell>
+      <TableCell align="center">{row.prazoMax}</TableCell>
+      <TableCell align="center">{row.desc}</TableCell>
     </TableRow>
   );
 };

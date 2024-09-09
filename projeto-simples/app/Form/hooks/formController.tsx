@@ -1,18 +1,52 @@
 import React, { useEffect } from "react";
-import { set, useFormContext, useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import dayjs from "dayjs";
-import { revertCurrency } from "./formatters";
+
 
 export default function FormController() {
-    const { watch, setValue } = useFormContext();
+    const { setValue, getValues } = useFormContext();
     const quantidade = useWatch({ name: "quantidade" });
-    const valor_unitario = useWatch({ name: "valorUnitario" });
+    const valorUnitario = useWatch({ name: "valorUnitario" });
 
     useEffect(() => {
-        const _quantidade = revertCurrency(quantidade);
-        const _valor_unitario = revertCurrency(valor_unitario);
-        const _valor = _quantidade * _valor_unitario;
-        const valor = 'R$ ' + _valor.toLocaleString('pt-br', {minimumFractionDigits: 2});
+        console.log("quantidade", quantidade);
+        console.log("valorUnitario", valorUnitario);
+        const values = getValues();
+        console.log("Valores do formulário:", values);
+        if (valorUnitario === undefined || quantidade === undefined) {
+            setValue("valor", 0);
+            return;
+        }
+        const valor = quantidade * valorUnitario;
         setValue("valor", valor);
-    }, [quantidade, valor_unitario]);
+    }, [quantidade, valorUnitario, setValue]);
+
+
+    return null;
+}
+
+export function submitForm(data: any, reset: any, addProduct: any) {
+    console.log("Dados recebidos no submit:", data);
+    const product = {
+        quantidade: data.quantidade,
+        vlrUnit: data.valorUnitario,
+        valor: data.valor,
+        peso: data.peso,
+        volume: data.volume,
+        prazoMin: data.prazoMin ? dayjs(data.prazoMin).format("YYYY-MM-DD") : "",
+        prazoMax: data.prazoMax ? dayjs(data.prazoMax).format("YYYY-MM-DD") : "",
+        desc: data.desc,
+    };
+    addProduct(product);
+
+    reset({
+        quantidade: 0,
+        valorUnitario: 0,
+        valor: 0,
+        peso: 0,
+        volume: 0,
+        prazoMin: 0,
+        prazoMax: 0,
+        desc: 0,
+    });
 }

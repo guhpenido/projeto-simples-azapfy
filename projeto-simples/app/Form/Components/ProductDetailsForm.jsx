@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box, InputAdornment, FormControl, InputLabel, Input } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CustomInput from "./CustomInput";
 import { TextField } from '@mui/material';
 import { Controller } from "react-hook-form";
-import { formatCurrency, formatNumber } from "../hooks/formatters.tsx";
 import dayjs from "dayjs";
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
-import { FormController } from "../hooks/formController.tsx";
+import { useFormContext } from "react-hook-form";
+import { NumericFormat } from 'react-number-format';
 
 
 function ProductDetailsForm({ register, setValue, }) {
@@ -17,41 +15,123 @@ function ProductDetailsForm({ register, setValue, }) {
     return (
         <>
             <Box className="flex flex-row flex-wrap">
-                <CustomInput
-                    id="quantidade"
-                    label="Quantidade"
-                    name="quantidade"
-                    endAdornment={<InputAdornment position="end">uni</InputAdornment>}
+                <Controller
+                    name='quantidade'
+                    control={control}
+                    render={({ field: { onChange, value, ...field } }) => (
+                        <NumericFormat
+                            {...field}
+                            value={value ?? ''}
+                            onValueChange={({ floatValue }) => {
+                                onChange(floatValue ?? 0);
+                                setValue('quantidade', floatValue ?? 0);
+                            }}
+                            thousandSeparator='.'
+                            decimalSeparator=','
+                            customInput={TextField}
+                            label={"Quantidade"}
+                            className="m-4 w-80"
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">uni</InputAdornment>,
+                            }}
+                            {...register('quantidade')}
+                        />
+                    )}
                 />
-                <CustomInput
-                    id="valorUnitario"
-                    label="Valor unitário"
-                    name="valorUnitario"
-                    startAdornment={
-                        <InputAdornment position="start">R$</InputAdornment>
-                    }
+                <Controller
+                    name='valorUnitario'
+                    control={control}
+                    render={({ field: { onChange, value, ...field } }) => (
+                        <NumericFormat
+                            {...field}
+                            value={value ?? ''}
+                            onValueChange={({ floatValue }) => {
+                                onChange(floatValue ?? 0);
+                                setValue('valorUnitario', floatValue ?? 0);
+                            }}
+                            thousandSeparator='.'
+                            decimalSeparator=','
+                            customInput={TextField}
+                            label={"Valor Unitário"}
+                            className="m-4 w-80"
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">R$</InputAdornment>
+                            }}
+                            {...register('valorUnitario')}
+                        />
+                    )}
                 />
-                <CustomInput
-                    id="peso"
-                    label="Peso"
-                    name="peso"
-                    endAdornment={<InputAdornment position="end">kg</InputAdornment>}
+
+                <Controller
+                    name='peso'
+                    control={control}
+                    render={({ field: { onChange, value, ...field } }) => (
+                        <NumericFormat
+                            {...field}
+                            value={value ?? ''}
+                            onValueChange={({ floatValue }) => {
+                                onChange(floatValue ?? 0);
+                                setValue('peso', floatValue ?? 0);
+                            }}
+                            thousandSeparator='.'
+                            decimalSeparator=','
+                            customInput={TextField}
+                            label={"Peso"}
+                            className="m-4 w-80"
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+                            }}
+                            {...register('peso')}
+                        />
+                    )}
                 />
-                <CustomInput
-                    id="volume"
-                    label="Volume"
-                    name="volume"
-                    endAdornment={<InputAdornment position="end">uni</InputAdornment>}
+                <Controller
+                    name='volume'
+                    control={control}
+                    render={({ field: { onChange, value, ...field } }) => (
+                        <NumericFormat
+                            {...field}
+                            value={value ?? ''}
+                            onValueChange={({ floatValue }) => {
+                                onChange(floatValue ?? 0);
+                                setValue('volume', floatValue ?? 0);
+                            }}
+                            thousandSeparator='.'
+                            decimalSeparator=','
+                            customInput={TextField}
+                            label={"Volume"}
+                            className="m-4 w-80"
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">uni</InputAdornment>,
+                            }}
+                            {...register('valorUnitario')}
+                        />
+                    )}
                 />
-                <CustomInput
-                    id="valor"
-                    label="Valor"
-                    name="valor"
-                    startAdornment={
-                        <InputAdornment position="start">R$</InputAdornment>
-                    }
+                <Controller
+                    name='valor'
+                    control={control}
+                    render={({ field: { onChange, value, ...field } }) => (
+                        <NumericFormat
+                            {...field}
+                            value={value ?? ''}
+                            onValueChange={({ floatValue }) => {
+                                onChange(floatValue ?? 0);
+                                setValue('valor', floatValue ?? 0);
+                            }}
+                            thousandSeparator='.'
+                            decimalSeparator=','
+                            customInput={TextField}
+                            label={"Valor"}
+                            className="m-4 w-80"
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">R$</InputAdornment>
+                            }}
+                            {...register('valor')}
+                        />
+                    )}
                 />
-            </Box>
+            </Box >
 
             <Box className="flex flex-row flex-wrap">
                 <FormControl className="m-4 w-60">
@@ -67,14 +147,18 @@ function ProductDetailsForm({ register, setValue, }) {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Controller
                             name="prazoMin"
-                            //control={control}
-                            render={({ field }) => (
+                            control={control}
+                            render={({ value }) => (
                                 <DatePicker
                                     label="Prazo Mínimo"
-                                    value={field.value ? dayjs(field.value) : null}
+                                    selected={value}
+                                    onChange={(date) => {
+                                        setValue('prazoMin', date);
+                                    }}
                                     format="DD/MM/YYYY"
                                 />
                             )}
+                            {...register("prazoMi")}
                         />
                     </LocalizationProvider>
                 </FormControl>
@@ -82,14 +166,18 @@ function ProductDetailsForm({ register, setValue, }) {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Controller
                             name="prazoMax"
-                            //control={control}
-                            render={({ field }) => (
+                            control={control}
+                            render={({ value }) => (
                                 <DatePicker
                                     label="Prazo Máximo"
-                                    value={field.value ? dayjs(field.value) : null}
+                                    selected={value}
+                                    onChange={(date) => {
+                                        setValue('prazoMax', date);
+                                    }}
                                     format="DD/MM/YYYY"
                                 />
                             )}
+                            {...register("prazoMax")}
                         />
                     </LocalizationProvider>
                 </FormControl>
