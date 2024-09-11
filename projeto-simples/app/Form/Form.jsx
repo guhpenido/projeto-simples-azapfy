@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Box, Typography, Button } from "@mui/material";
 import TotalsSection from "./Components/TotalsSection";
@@ -9,6 +9,7 @@ import FormController from "./hooks/formController.tsx";
 import TotalController from "./hooks/TotalController";
 import useStore from "./hooks/useStore";
 import defaultValues from "./hooks/defaultValues";
+import dayjs from "dayjs";
 
 function Form() {
   const methods = useForm();
@@ -27,8 +28,8 @@ function Form() {
       valor: data.valor,
       peso: data.peso,
       volume: data.volume,
-      prazoMin: data.prazoMin ? dayjs(data.prazoMin).format("YYYY-MM-DD") : "",
-      prazoMax: data.prazoMax ? dayjs(data.prazoMax).format("YYYY-MM-DD") : "",
+      prazoMin: data.prazoMin ? dayjs(data.prazoMin).format("DD/MM/YYYY") : "",
+      prazoMax: data.prazoMax ? dayjs(data.prazoMax).format("DD/MM/YYYY") : "",
       desc: data.desc,
     };
     addProduct(product);

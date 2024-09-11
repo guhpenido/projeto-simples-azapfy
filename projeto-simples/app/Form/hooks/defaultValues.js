@@ -4,8 +4,8 @@ const defaultValues = {
     valor: 0,
     peso: 0,
     volume: 0,
-    prazoMin: "",
-    prazoMax: "",
+    prazoMin: null,
+    prazoMax: null,
     desc: "",
   };
   

@@ -1,21 +1,21 @@
 import React from "react";
-import { Box, InputAdornment, FormControl, InputLabel, Input, TextField } from "@mui/material";
+import { Box, InputAdornment, FormControl, TextField } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Controller, useFormContext } from "react-hook-form";
 import { NumericFormat } from 'react-number-format';
 
-
-function ProductDetailsForm({ register, setValue, }) {
+function ProductDetailsForm({ setValue }) {
     const { control } = useFormContext();
+    
     return (
         <>
             <Box className="flex flex-row flex-wrap">
                 <Controller
-                    rules={{ required: true }}
                     name='quantidade'
                     control={control}
+                    rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
                             {...field}
@@ -32,14 +32,13 @@ function ProductDetailsForm({ register, setValue, }) {
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">uni</InputAdornment>,
                             }}
-
                         />
                     )}
                 />
                 <Controller
                     name='valorUnitario'
-                    rules={{ required: true }}
                     control={control}
+                    rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
                             {...field}
@@ -58,15 +57,13 @@ function ProductDetailsForm({ register, setValue, }) {
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">R$</InputAdornment>
                             }}
-                            {...register('valorUnitario')}
                         />
                     )}
                 />
-
                 <Controller
                     name='peso'
-                    rules={{ required: true }}
                     control={control}
+                    rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
                             {...field}
@@ -83,14 +80,13 @@ function ProductDetailsForm({ register, setValue, }) {
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">kg</InputAdornment>,
                             }}
-                            {...register('peso')}
                         />
                     )}
                 />
                 <Controller
                     name='volume'
-                    rules={{ required: true }}
                     control={control}
+                    rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
                             {...field}
@@ -107,14 +103,13 @@ function ProductDetailsForm({ register, setValue, }) {
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">uni</InputAdornment>,
                             }}
-                            {...register('valorUnitario')}
                         />
                     )}
                 />
                 <Controller
                     name='valor'
-                    rules={{ required: true }}
                     control={control}
+                    rules={{ required: true }}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
                             {...field}
@@ -133,38 +128,44 @@ function ProductDetailsForm({ register, setValue, }) {
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">R$</InputAdornment>
                             }}
-                            {...register('valor')}
                         />
                     )}
                 />
-            </Box >
+            </Box>
 
             <Box className="flex flex-row flex-wrap">
-                <FormControl className="m-4 w-60">
-                    <InputLabel htmlFor="descricao">Descrição</InputLabel>
-                    <Input
-                        id="descricao"
-                        type="text"
-                        name="desc"
-                        {...register("desc")}
-                    />
-                </FormControl>
+                <Controller
+                    name="desc"
+                    control={control}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            label="Descrição"
+                            className="m-4 w-60"
+                            onChange={(e) => {
+                                field.onChange(e);
+                                setValue("desc", e.target.value);
+                            }}
+                        />
+                    )}
+                />
                 <FormControl className="m-4 w-60">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Controller
                             name="prazoMin"
                             control={control}
-                            render={({ value }) => (
+                            render={({ field: { onChange, value, ...field } }) => (
                                 <DatePicker
+                                    {...field}
                                     label="Prazo Mínimo"
-                                    selected={value}
+                                    value={value}
                                     onChange={(date) => {
+                                        onChange(date);
                                         setValue('prazoMin', date);
                                     }}
                                     format="DD/MM/YYYY"
                                 />
                             )}
-                            {...register("prazoMi")}
                         />
                     </LocalizationProvider>
                 </FormControl>
@@ -173,17 +174,18 @@ function ProductDetailsForm({ register, setValue, }) {
                         <Controller
                             name="prazoMax"
                             control={control}
-                            render={({ value }) => (
+                            render={({ field: { onChange, value, ...field } }) => (
                                 <DatePicker
+                                    {...field}
                                     label="Prazo Máximo"
-                                    selected={value}
+                                    value={value}
                                     onChange={(date) => {
+                                        onChange(date);
                                         setValue('prazoMax', date);
                                     }}
                                     format="DD/MM/YYYY"
                                 />
                             )}
-                            {...register("prazoMax")}
                         />
                     </LocalizationProvider>
                 </FormControl>

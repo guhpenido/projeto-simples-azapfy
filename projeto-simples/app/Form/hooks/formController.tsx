@@ -7,7 +7,6 @@ export default function FormController() {
   const valorUnitario = useWatch({ name: "valorUnitario" });
 
   useEffect(() => {
-    const values = getValues();
     if (valorUnitario === undefined || quantidade === undefined) {
       setValue("valor", 0);
       return;
