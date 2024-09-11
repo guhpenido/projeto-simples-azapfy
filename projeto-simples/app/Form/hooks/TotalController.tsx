@@ -4,7 +4,7 @@ import useStore from "./useStore";
 
 export default function TotalController() {
   const products = useStore((state) => state.products);
-  const { control, setValue, getValues } = useFormContext();
+  const { control, setValue } = useFormContext();
   const frete = useWatch({ control, name: "frete" });
   const desconto = useWatch({ control, name: "desconto" });
   const totalProdutos = useWatch({ control, name: "totalProdutos" });

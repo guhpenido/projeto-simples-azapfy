@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, InputAdornment } from "@mui/material";
-import { useFormContext, useWatch, Controller } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { NumericFormat } from 'react-number-format';
 import { TextField } from '@mui/material';
 
 function TotalsSection({ register }) {
-    const { control, setValue, getValues } = useFormContext();
+    const { control, setValue } = useFormContext();
     return (
         <Box className="flex flex-row flex-wrap">
             <Controller

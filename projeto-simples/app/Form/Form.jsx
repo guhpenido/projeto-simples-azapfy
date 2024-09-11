@@ -7,8 +7,7 @@ import ProductDetailsForm from "./Components/ProductDetailsForm";
 import AdditionalInfoSection from "./Components/AdditionalInfoSection";
 import FormController from "./hooks/formController.tsx";
 import TotalController from "./hooks/TotalController";
-import { FormProvider, useFormContext } from "react-hook-form";
-import { submitForm } from "./hooks/formController";
+import { FormProvider } from "react-hook-form";
 import useStore from "./hooks/useStore";
 import defaultValues from "./hooks/defaultValues";
 
@@ -16,7 +15,7 @@ function Form() {
   const methods = useForm();
   const products = useStore((state) => state.products);
   const addProduct = useStore((state) => state.addProduct);
-  const { register, handleSubmit, control, setValue, reset, getValues } = useForm();
+  const { register, setValue } = useForm();
 
   const onSubmit = (data) => {
     if (data.quantidade <= 0 || data.valorUnitario <= 0 || data.peso <= 0 || data.volume <= 0) {
