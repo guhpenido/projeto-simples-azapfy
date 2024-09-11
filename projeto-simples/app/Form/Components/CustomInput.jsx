@@ -109,6 +109,7 @@ export function InputDate({
             {...field}
             label={label}
             value={value}
+            className="m-4 w-60"
             onChange={(date) => {
               onChange(date);
             }}
