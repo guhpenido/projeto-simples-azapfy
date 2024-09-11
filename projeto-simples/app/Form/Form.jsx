@@ -13,9 +13,7 @@ import dayjs from "dayjs";
 
 function Form() {
   const methods = useForm();
-  const products = useStore((state) => state.products);
   const addProduct = useStore((state) => state.addProduct);
-  const { register, setValue } = useForm();
 
   const onSubmit = (data) => {
     if (data.quantidade <= 0 || data.valorUnitario <= 0 || data.peso <= 0 || data.volume <= 0) {
@@ -38,25 +36,20 @@ function Form() {
 
   return (
     <Box p={4}>
-      <Typography variant="h5" color="textSecondary" mb={3}>
-        Mais informações
-      </Typography>
       <FormProvider {...methods}>
+        <Typography variant="h5" color="textSecondary" mb={3}>
+          Mais informações
+        </Typography>
         <form>
-          <TotalsSection register={register} products={products} setValue={setValue} />
+          <TotalsSection />
           <TotalController />
         </form>
-      </FormProvider>
-      <AdditionalInfoSection register={register} />
-
-      <Typography variant="h6" color="textSecondary" mt={3}>
-        Descrição do Produto/Serviço
-      </Typography>
-      <FormProvider {...methods}>
+        <AdditionalInfoSection />
+        <Typography variant="h6" color="textSecondary" mt={3}>
+          Descrição do Produto/Serviço
+        </Typography>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <ProductDetailsForm
-            register={register}
-            setValue={setValue}
           />
           <Button type="submit" variant="contained" color="primary">
             +
@@ -64,7 +57,7 @@ function Form() {
           <FormController />
         </form>
       </FormProvider>
-    </Box>
+    </Box >
   );
 }
 

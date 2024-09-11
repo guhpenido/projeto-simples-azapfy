@@ -1,17 +1,14 @@
 import React from "react";
-import { Box, FormControl, InputLabel, Input } from "@mui/material";
+import { InputText } from "./CustomInput";
+import { Box } from "@mui/material";
+import { useFormContext } from "react-hook-form";
 
-function AdditionalInfoSection({ register }) {
+function AdditionalInfoSection() {
+  const { control } = useFormContext();
   return (
     <Box className="flex flex-row flex-wrap">
-      <FormControl className="m-4 w-80">
-        <InputLabel htmlFor="pontoReferencia">Ponto de referência</InputLabel>
-        <Input id="pontoReferencia" type="text" {...register("pontoReferencia")} />
-      </FormControl>
-      <FormControl className="m-4 w-96">
-        <InputLabel htmlFor="obs">Obs.</InputLabel>
-        <Input id="obs" type="text" {...register("obs")} />
-      </FormControl>
+      <InputText label="Ponto de referência" name="pontoReferencia" control={control}/>
+      <InputText label="Obs." name="obs" control={control} />
     </Box>
   );
 }
