@@ -8,7 +8,7 @@ import AdditionalInfoSection from "./Components/AdditionalInfoSection";
 import FormController from "./hooks/formController.tsx";
 import TotalController from "./hooks/TotalController";
 import { FormProvider, useFormContext } from "react-hook-form";
-import { submitForm } from "./hooks/formController.tsx";
+import { submitForm } from "./hooks/formController";
 import useStore from "./hooks/useStore";
 
 function Form() {
@@ -24,8 +24,8 @@ function Form() {
       </Typography>
       <FormProvider {...methods}>
         <form>
-        <TotalsSection register={register} products={products} setValue={setValue} />
-        <TotalController />
+          <TotalsSection register={register} products={products} setValue={setValue} />
+          <TotalController />
         </form>
       </FormProvider>
       <AdditionalInfoSection register={register} />
@@ -34,7 +34,11 @@ function Form() {
         Descrição do Produto/Serviço
       </Typography>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit((data) => submitForm(data, reset, addProduct))}>
+        <form onSubmit={handleSubmit((data) => {
+          submitForm(data, reset, addProduct);
+          reset();
+          setValue("quantidade", 0);
+        })}>
           <ProductDetailsForm
             register={register}
             setValue={setValue}
@@ -49,4 +53,4 @@ function Form() {
   );
 }
 
-export default React.memo(Form);
+export default Form;

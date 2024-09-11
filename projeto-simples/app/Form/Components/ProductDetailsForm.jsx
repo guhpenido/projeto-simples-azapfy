@@ -34,7 +34,7 @@ function ProductDetailsForm({ register, setValue, }) {
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">uni</InputAdornment>,
                             }}
-                            {...register('quantidade')}
+
                         />
                     )}
                 />
