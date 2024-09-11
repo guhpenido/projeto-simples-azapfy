@@ -1,13 +1,12 @@
 "use client";
 import React, { useState, useCallback } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { Box, Typography, Button } from "@mui/material";
 import TotalsSection from "./Components/TotalsSection";
 import ProductDetailsForm from "./Components/ProductDetailsForm";
 import AdditionalInfoSection from "./Components/AdditionalInfoSection";
 import FormController from "./hooks/formController.tsx";
 import TotalController from "./hooks/TotalController";
-import { FormProvider } from "react-hook-form";
 import useStore from "./hooks/useStore";
 import defaultValues from "./hooks/defaultValues";
 
