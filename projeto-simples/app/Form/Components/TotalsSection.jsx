@@ -18,8 +18,10 @@ function TotalsSection({ register }) {
                         onValueChange={({ floatValue }) => {
                             onChange(floatValue ?? 0);
                         }}
-                        thousandSeparator="."
-                        decimalSeparator=","
+                        thousandSeparator='.'
+                        decimalSeparator=','
+                        decimalScale={2}
+                        fixedDecimalScale={true}
                         customInput={TextField}
                         label="Valor do Frete"
                         className="m-4 w-80"
@@ -40,8 +42,10 @@ function TotalsSection({ register }) {
                         onValueChange={({ floatValue }) => {
                             onChange(floatValue ?? 0);
                         }}
-                        thousandSeparator="."
-                        decimalSeparator=","
+                        thousandSeparator='.'
+                        decimalSeparator=','
+                        decimalScale={2}
+                        fixedDecimalScale={true}
                         customInput={TextField}
                         label="Desconto"
                         className="m-4 w-80"
@@ -63,8 +67,10 @@ function TotalsSection({ register }) {
                             onChange(floatValue ?? 0);
                             setValue('totalProdutos', floatValue ?? 0);
                         }}
-                        thousandSeparator="."
-                        decimalSeparator=","
+                        thousandSeparator='.'
+                        decimalSeparator=','
+                        decimalScale={2}
+                        fixedDecimalScale={true}
                         customInput={TextField}
                         label="Total dos Produtos/Serviços"
                         className="m-4 w-80"
@@ -86,8 +92,10 @@ function TotalsSection({ register }) {
                             onChange(floatValue ?? 0);
                             setValue('totalNota', floatValue ?? 0);
                         }}
-                        thousandSeparator="."
-                        decimalSeparator=","
+                        thousandSeparator='.'
+                        decimalSeparator=','
+                        decimalScale={2}
+                        fixedDecimalScale={true}
                         customInput={TextField}
                         label="Total da Nota"
                         className="m-4 w-80"

@@ -16,6 +16,7 @@ function ProductDetailsForm({ register, setValue, }) {
         <>
             <Box className="flex flex-row flex-wrap">
                 <Controller
+                    rules={{ required: true }}
                     name='quantidade'
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
@@ -40,6 +41,7 @@ function ProductDetailsForm({ register, setValue, }) {
                 />
                 <Controller
                     name='valorUnitario'
+                    rules={{ required: true }}
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
@@ -51,6 +53,8 @@ function ProductDetailsForm({ register, setValue, }) {
                             }}
                             thousandSeparator='.'
                             decimalSeparator=','
+                            decimalScale={2}
+                            fixedDecimalScale={true}
                             customInput={TextField}
                             label={"Valor Unitário"}
                             className="m-4 w-80"
@@ -64,6 +68,7 @@ function ProductDetailsForm({ register, setValue, }) {
 
                 <Controller
                     name='peso'
+                    rules={{ required: true }}
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
@@ -87,6 +92,7 @@ function ProductDetailsForm({ register, setValue, }) {
                 />
                 <Controller
                     name='volume'
+                    rules={{ required: true }}
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
@@ -110,6 +116,7 @@ function ProductDetailsForm({ register, setValue, }) {
                 />
                 <Controller
                     name='valor'
+                    rules={{ required: true }}
                     control={control}
                     render={({ field: { onChange, value, ...field } }) => (
                         <NumericFormat
@@ -121,6 +128,8 @@ function ProductDetailsForm({ register, setValue, }) {
                             }}
                             thousandSeparator='.'
                             decimalSeparator=','
+                            decimalScale={2}
+                            fixedDecimalScale={true}
                             customInput={TextField}
                             label={"Valor"}
                             className="m-4 w-80"

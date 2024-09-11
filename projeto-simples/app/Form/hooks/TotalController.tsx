@@ -10,10 +10,6 @@ export default function TotalController() {
   const totalProdutos = useWatch({ control, name: "totalProdutos" });
 
   useEffect(() => {
-    console.log("frete", frete);
-    console.log("desconto", desconto);
-    console.log("totalProdutos", totalProdutos);
-
     if (frete === undefined || desconto === undefined) {
       setValue("frete", 0);
       setValue("desconto", 0);

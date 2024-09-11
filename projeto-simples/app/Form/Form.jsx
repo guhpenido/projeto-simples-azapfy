@@ -10,12 +10,32 @@ import TotalController from "./hooks/TotalController";
 import { FormProvider, useFormContext } from "react-hook-form";
 import { submitForm } from "./hooks/formController";
 import useStore from "./hooks/useStore";
+import defaultValues from "./hooks/defaultValues";
 
 function Form() {
   const methods = useForm();
   const products = useStore((state) => state.products);
   const addProduct = useStore((state) => state.addProduct);
   const { register, handleSubmit, control, setValue, reset, getValues } = useForm();
+
+  const onSubmit = (data) => {
+    if (data.quantidade <= 0 || data.valorUnitario <= 0 || data.peso <= 0 || data.volume <= 0) {
+      alert("Valores devem ser diferentes de 0.");
+      return;
+    }
+    const product = {
+      quantidade: data.quantidade,
+      vlrUnit: data.valorUnitario,
+      valor: data.valor,
+      peso: data.peso,
+      volume: data.volume,
+      prazoMin: data.prazoMin ? dayjs(data.prazoMin).format("YYYY-MM-DD") : "",
+      prazoMax: data.prazoMax ? dayjs(data.prazoMax).format("YYYY-MM-DD") : "",
+      desc: data.desc,
+    };
+    addProduct(product);
+    methods.reset(defaultValues);
+  };
 
   return (
     <Box p={4}>
@@ -34,11 +54,7 @@ function Form() {
         Descrição do Produto/Serviço
       </Typography>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit((data) => {
-          submitForm(data, reset, addProduct);
-          reset();
-          setValue("quantidade", 0);
-        })}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
           <ProductDetailsForm
             register={register}
             setValue={setValue}

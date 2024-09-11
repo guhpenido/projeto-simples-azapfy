@@ -33,7 +33,6 @@ const EnhancedTable: React.FC = () => {
   const [rows, setRows] = useState<Data[]>([]);
 
   useEffect(() => {
-    console.log("products", products);
     const newRows = products.map((produto, index) => createData(
       index,
       produto.quantidade.toString(),
